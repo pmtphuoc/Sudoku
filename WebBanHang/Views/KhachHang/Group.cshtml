@@ -1,0 +1,17 @@
+﻿@using WebBanHang.Models;
+@model List<ThanhVien>
+@{
+    Layout = null;
+}
+
+@*Group*@
+@foreach (var GroupDL in Model.GroupBy(n => n.LoaiTV))
+{
+    <div>@GroupDL.Key.TenLoai</div>
+    foreach (var item in GroupDL)
+    {
+        <p>@item.TaiKhoan</p>
+
+    }
+
+}

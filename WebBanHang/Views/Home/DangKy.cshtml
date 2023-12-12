@@ -1,0 +1,71 @@
+﻿@using WebBanHang.Models;
+@using CaptchaMvc.HtmlHelpers
+@using CaptchaMvc
+@model ThanhVien
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Layouts/HomeLayout.cshtml";
+}
+
+<div class="cart-box-main">
+    <div class="container">
+        @using (Html.BeginForm())
+        {
+            <div class="row new-account-login">
+                <div class="col-sm-6 col-lg-6 mb-3">
+
+                    <div class="title-left">
+                        <h3>Tạo tài khoản</h3>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="InputEmail" class="mb-0">Tài khoản</label>
+                        @Html.TextBox("TaiKhoan")
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="" class="mb-0">Họ tên</label>
+                        @Html.TextBox("HoTen")
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="InputPassword3" class="mb-0">Địa chỉ</label>
+                        @Html.TextBox("DiaChi")
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="InputEmail2" class="mb-0">Email</label>
+                        @Html.TextBox("Email")
+                    </div>
+
+
+
+                </div>
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="title-left">
+                        <h3>Tạo tài khoản</h3>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="InputName" class="mb-0">Mật khẩu</label>
+                        @Html.Password("MatKhau")
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="InputLastname" class="mb-0">Số Điện Thoại</label>
+                        @Html.TextBox("SoDT")
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="InputEmail1" class="mb-0">Câu hỏi bí mật</label>
+                        @Html.TextBox("CauHoi")
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="InputPassword1" class="mb-0">Câu trả lời</label>
+                        @Html.TextBox("CauTraLoi")
+                    </div>
+                    <div>@Html.MathCaptcha()</div>
+                    <button type="submit" class="btn hvr-hover">Register</button>
+
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+<h1 style="color:red;">@ViewBag.ThongBao</h1>

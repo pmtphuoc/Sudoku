@@ -1,0 +1,91 @@
+﻿
+@using WebBanHang.Models
+@model GioHang
+
+@{
+    ViewBag.Title = "SuaGH";
+    Layout = "~/Views/Layouts/HomeLayout.cshtml";
+
+}
+
+
+@{
+    List<GioHang> lstGH = ViewBag.GioHang as List<GioHang>;
+
+}
+<div class="wrapper">
+    <div class="cart-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-main table-responsive">
+                        <table class="table">
+
+                            <thead>
+                                <tr>
+                                    <th>Images</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Số lượng</th>
+                                    <th>Total</th>
+                                    <th>Update</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in lstGH)
+                                {
+                                    if (Model.MaSP == item.MaSP)
+                                    {
+
+                                        using (Html.BeginForm("CapNhatGH", "GioHang"))
+                                        {
+                                            <tr>
+                                                <td class="thumbnail-img">
+                                                    <a href="#">
+                                                        <img class="img-fluid" src="@Url.Content("~/Content/HinhSP/" + item.HinhAnh)" alt="" />
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a>
+                                                        @Html.Hidden("MaSP", item.MaSP)
+                                                        @item.TenSP
+
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <p>@item.DonGia.ToString("#,##") VND</p>
+                                                </td>
+                                                <td>
+                                                    @Html.TextBox("SoLuong", item.SoLuong)
+
+                                                    <p id="TB_SoLuongtd"></p>
+                                                </td>
+                                                <td>
+                                                    <p>@item.ThanhTien.ToString("#,##") VND</p>
+                                                </td>
+                                                <td><input type="submit" value="Cập nhật" /></td>
+                                                <td class="remove-pr">
+                                                    <a href="@Url.Action("XoaGH", new { @MaSP = item.MaSP })">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    }
+
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

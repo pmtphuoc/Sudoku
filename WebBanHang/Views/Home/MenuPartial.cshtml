@@ -1,0 +1,57 @@
+﻿
+
+@using WebBanHang.Models;
+@model IEnumerable<SanPham>
+
+
+           
+<div class="navbar-header">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="toggle navigation">
+        <i class="fa fa-bars"></i>
+    </button>
+    <a class="navbar-brand" href="@Url.Action("index","home")"><img src="~/content/images/logo.png" class="logo" alt=""></a>
+</div>
+<div class="collapse navbar-collapse" id="navbar-menu">
+    <ul class="nav navbar-nav ml-auto" data-in="fadeindown" data-out="fadeoutup">
+        <li class="nav-item active"><a class="nav-link" href="@Url.Action("index","home")">Home</a></li>
+
+       
+                            @foreach (var groupItem in Model.GroupBy(n => n.LoaiSP))
+                            {
+                                if (groupItem.Key != null)
+                                {
+                                    
+                                            foreach (var item in groupItem.GroupBy(n => n.NhaSX))
+                                            {
+                                                if (item.Key != null)
+                                                {
+                                                    <li class= "nav-item active"><a class="nav-link"  href="@Url.Action("SanPham","SanPham",new { @MaLoaiSP = groupItem.Key.MaLoaiSP,@MaNSX=item.Key.MaNSX })">@item.Key.TenNSX</a></li>
+
+                                                }
+                                            }
+
+
+                                }
+                            } 
+                        
+
+
+      
+        
+
+
+    </ul>
+    @*@using (Html.BeginForm("TimKiemTu", "TimKiem"))
+    {
+        <div class="top-search">
+            <div class="container">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" name="tukhoa" class="form-control" placeholder="Search">
+                    <span class="input-group-addon search"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+        </div>
+    }*@
+</div>
+      

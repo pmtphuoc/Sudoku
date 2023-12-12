@@ -1,0 +1,180 @@
+﻿@using WebBanHang.Models;
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="text-slid-box">
+                <div id="offer-box" class="carouselTicker">
+                    <ul class="offer-box">
+                        <li>
+                            <i class="fab fa-opencart"></i> Off 10%! Shop Now Man
+                        </li>
+                        <li>
+                            <i class="fab fa-opencart"></i> 50% - 80% off on Fashion
+                        </li>
+                        <li>
+                            <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT20
+                        </li>
+                        <li>
+                            <i class="fab fa-opencart"></i> Off 50%! Shop Now
+                        </li>
+                        <li>
+                            <i class="fab fa-opencart"></i> Off 10%! Shop Now Man
+                        </li>
+                        <li>
+                            <i class="fab fa-opencart"></i> 50% - 80% off on Fashion
+                        </li>
+                        <li>
+                            <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT20
+                        </li>
+                        <li>
+                            <i class="fab fa-opencart"></i> Off 50%! Shop Now
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="right-phone-box">
+                <p>Call US :- <a href="#"> +11 900 800 100</a></p>
+            </div>
+            <div class="our-link">
+                <ul>
+                    @if (Session["TaiKhoan"] != null )
+                    {
+                        ThanhVien tv = (ThanhVien)Session["TaiKhoan"];
+                        <li style="color:red">HELLO, @tv.HoTen</li>
+                        @Html.ActionLink("Đăng Xuất", "DangXuat", "Home")
+                    }
+                    else
+                    {
+                        <li><a id="btndn" href="#">Login</a></li>
+                        <li><a id="btndn" href="@Url.Action("DangKy","Home")">Register</a></li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--===============================================================================================-->
+<link rel="icon" type="image/png" href="~/Content/images/icons/favicon.ico" />
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Content/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Content/vendor/animate/animate.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Content/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Content/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Content/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Content/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Content/css/util.css">
+<link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
+<!--===============================================================================================-->
+
+<div class="abc"> 
+    <br />
+
+
+    <div class="limiter">
+        <div class="container-fluid">
+            <div id="popup_login">
+                <div class="wrap-login100">
+                    <div style="clear:both;text-align:right;margin-bottom:0;">
+                        <span id="close-form" class="btn btn-danger">X</span>
+                    </div>
+
+                    
+                        @using (Html.BeginForm("DangNhap", "Home", FormMethod.Post,new {@class= "login100-form validate-form p-l-55 p-r-55 p-t-178" }))
+                        {
+
+                            <span class="login100-form-title">
+                                Sign In
+                            </span>
+
+                            <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+                                <input class="input100" type="text" name="username" placeholder="Username">
+                                <span class="focus-input100"></span>
+                            </div>
+
+                            <div class="wrap-input100 validate-input" data-validate="Please enter password">
+                                <input class="input100" type="password" name="pass" placeholder="Password">
+                                <span class="focus-input100"></span>
+                            </div>
+
+                            <div class="text-right p-t-13 p-b-23">
+                                <span class="txt1">
+                                  
+                                </span>
+                                <h3 style="font-weight:bold;color:red;text-align:left;" id="ThongBao">  </h3>
+                                <a href="#" class="txt2">
+                                    
+                                </a>
+                            </div>
+
+                            <div class="container-login100-form-btn">
+                                <button class="login100-form-btn" id=" btnDN">
+                                    Sign in
+                                </button>
+                            </div>
+
+                            <div class="flex-col-c p-t-170 p-b-40">
+                                <span class="txt1 p-b-9">
+                                    Don’t have an account?
+                                </span>
+
+                                <a href="@Url.Action("DangKy","Home")" class="txt3">
+                                    Sign up now
+                                </a>
+                            </div>}
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--===============================================================================================-->
+<script src="~/Content/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/Content/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/Content/vendor/bootstrap/js/popper.js"></script>
+<script src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/Content/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/Content/vendor/daterangepicker/moment.min.js"></script>
+<script src="~/Content/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="~/Content/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="~/Content/js/main.js"></script>
+<script>
+    $("#btndn").click(function () {
+        $("#popup_login").show();
+    });
+    $("#close-form").click(function () {
+        $("#popup_login").hide();
+    });
+
+</script>
+
+
+
+
+
+<style>
+    .abc {
+        position: absolute;
+        top: 10%;
+        left: 35%;
+        z-index: 10;
+    }
+</style>

@@ -1,0 +1,13 @@
+Vào mục Models, xóa BanHang.dbml, 
+sau đó click chuột phải Models, Add/New Item..., tìm LINQ to SQL Classes rồi tạo mới
+add database từ SQL Management với tài khoản sa
+
+Run View Home/Index
+
+Để vào trang quản trị: 
+Nhấp vào login: 
+Tài khoản admin : user là admin, pass là admin
+Tài khoản member nhân viên : ad là ad, pass là ad
+Để đăng nhập tài khoản người dùng
+user là user
+pass là user

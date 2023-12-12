@@ -1,0 +1,155 @@
+﻿@model IEnumerable<WebBanHang.Models.GioHang>
+
+@{
+    ViewBag.Title = "XemGH";
+    Layout = "~/Views/Layouts/HomeLayout.cshtml";
+}
+
+@if (Model == null)
+{
+    <h1>Giỏ hàng trống</h1>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaSP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonGia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThanhTien)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonGia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThanhTien)
+                </td>
+
+                <td>
+
+                    <a href="@Url.Action("SuaGH", "GioHang", new { @MaSP = item.MaSP })">Sữa</a>
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @*Dat hang cho khach khong account*@
+    using (Html.BeginForm("DatHang", "GioHang"))
+    {
+        if (Session["TaiKhoan"] == null)
+        {
+            <div class="cart">
+                <table align="left" class="table">
+                    <tr>
+                        <td align="center" colspan="2"><b>Thông tin khách hàng</b></td>
+                    </tr>
+                    <tr>
+                        <td>Họ tên</td>
+                        <td>
+                            @Html.TextBox("TenKH")
+                            <p style="color:red" ; id="TB_TenKH"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>
+                            @Html.TextBox("Email")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Số Điện Thoại</td>
+                        <td>
+                            @Html.TextBox("SoDT")
+                            <p style="color:red" ; id="TB_SoDT"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ</td>
+                        <td>
+                            @Html.TextArea("DiaChi")
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+    }
+    <script>
+        $("#btndh").click(function () {
+            var loi = 0;
+            if ($("#TenKH").val() == "") {
+                $("#TB_TenKH").text("Họ tên bị trống !")
+                loi++;
+
+            }
+            else {
+                $("#TB_TenKH").text("")
+            }
+            $("#btndh").click(function () {
+                var loi = 0;
+                if ($("#SoDT").val() == "") {
+                    $("#TB_SoDT").text("Số điện thoại bị trống !")
+                    loi++;
+
+                }
+                else {
+                    $("#TB_SoDT").text("")
+                }
+                if (loi != 0) {
+                    return false;
+                }
+            });
+    </script>
+
+    <div class="row my-5">
+        <div class="col-lg-8 col-sm-12"></div>
+        <div class="col-lg-4 col-sm-12">
+            <div class="order-box">
+                <h3>Order summary</h3>
+
+                <hr>
+                <div class="d-flex gr-total">
+                    <h5>Grand Total</h5>
+                    <div class="ml-auto h5"> @ViewBag.TongTien</div>
+                </div>
+                <hr>
+
+                @using (Html.BeginForm("DatHang", "GioHang"))
+                {
+                    <div class="col-12 d-flex shopping-box"><input id="btndh" type="submit" value="Đặt hàng" class="ml-auto btn hvr-hover" /> </div>
+                    @Html.ActionLink("Mua Tiếp", "Index", "Home", new { @class = "btn btn-success" })
+                }
+            </div>
+        </div>
+    </div>
+
+
+}

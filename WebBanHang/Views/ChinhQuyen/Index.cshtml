@@ -1,0 +1,54 @@
+﻿@using WebBanHang.Models;
+@model IEnumerable<LoaiTV>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+    WebGrid gr = new WebGrid(source: Model, rowsPerPage: 6);
+}
+
+
+
+@gr.GetHtml(
+
+    tableStyle: "divTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    columns: gr.Columns(
+        gr.Column("MaLoaiTV", "Mã loại TV"),
+        gr.Column("TenLoai", "Loại thành viên"),
+      
+        gr.Column(format: p => Html.ActionLink("Chỉnh Quyền", "ChinhQuyen", new { id = p.MaLoaiTV }))
+       
+       )
+
+    )
+
+<style>
+    .divTalble {
+        width: 100%;
+        border: 1px solid #999999;
+    }
+
+        .divTalble td {
+            border: 1px solid #999999;
+        }
+
+    .gridHead {
+        background-color: green;
+    }
+
+        .gridHead > th > a {
+            color: #fff;
+        }
+
+    .gridFooter {
+        font-weight: bold;
+    }
+
+    .gridRow {
+        color: #fff;
+        background-color: blueviolet
+    }
+</style>

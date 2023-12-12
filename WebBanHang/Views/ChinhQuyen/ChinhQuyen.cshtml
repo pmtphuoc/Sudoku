@@ -1,0 +1,66 @@
+﻿@using WebBanHang.Models;
+
+@model LoaiTV
+
+@{
+    ViewBag.Title = "ChinhQuyen";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+}
+
+<h1>Chỉnh Quyền</h1>
+<h2 style="color:red;">Loại thành viên: <font color="orange">@Model.TenLoai</font></h2>
+<br />
+@{
+    IEnumerable<Quyen> lstQuyen = (IEnumerable<Quyen>)ViewBag.MaQuyen;
+    IEnumerable<LoaiTV_Quyen> lstLTVQuyen = (IEnumerable<LoaiTV_Quyen>)ViewBag.LoaiTVQuyen;
+}
+@using (Html.BeginForm())
+{
+    @Html.Hidden("MaLTV", Model.MaLoaiTV)
+    if (lstLTVQuyen != null)
+    {
+        for (int i = 0; i < lstQuyen.Count(); i++)
+        {
+            int k = 0;
+            for (int j = 0; j < lstLTVQuyen.Count(); j++)
+            {
+                if (lstQuyen.ElementAt(i).MaQuyen == lstLTVQuyen.ElementAt(j).MaQuyen)
+                {
+                    k++;
+                    break;
+                }
+            }
+            if (k != 0)
+            {
+                <div class="col-md-4" style="font-size:15pt;">
+
+                    <input class="pclick" checked="checked" style="width:20px;height:20px;" type="checkbox" name="@Url.Content("["+i+"].MaQuyen")" value="@lstQuyen.ElementAt(i).MaQuyen" />@lstQuyen.ElementAt(i).TenQuyen
+                </div>
+            }
+            else
+            {
+                <div class="col-md-4" style="font-size:15pt;">
+
+                    <input class="pclick" style="width:20px;height:20px;" type="checkbox" name="@Url.Content("["+i+"].MaQuyen")" value="@lstQuyen.ElementAt(i).MaQuyen" />@lstQuyen.ElementAt(i).TenQuyen
+                </div>
+            }
+            k = 0;
+        }
+    }
+    else
+    {
+        for (int i = 0; i < lstQuyen.Count(); i++)
+        {
+            <div class="col-md-4" style="font-size:15pt;">
+
+                <input class="pclick" style="width:20px;height:20px;" type="checkbox" name="@Url.Content("["+i+"].MaQuyen")" value="@lstQuyen.ElementAt(i).MaQuyen" />@lstQuyen.ElementAt(i).TenQuyen
+            </div>
+        }
+    }
+    <div class="clearfix"></div>
+    <input type="submit" value="Thực hiện" class="btn btn-success" />
+}
+<br />
+
+@Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-primary" })
+

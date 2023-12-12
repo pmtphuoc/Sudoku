@@ -1,0 +1,52 @@
+﻿@using WebBanHang.Models;
+@model IEnumerable<SanPham>
+@{
+    ViewBag.Title = "QuanLySP";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+    WebGrid gr = new WebGrid(source: Model, rowsPerPage: 6);
+}
+
+
+
+@gr.GetHtml(
+
+    tableStyle: "divTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    columns: gr.Columns(
+        gr.Column("MaSP", "Mã sản phẩm"),
+        gr.Column("TenSP", "Tên sản phẩm"),
+        gr.Column("CauHinh", "Mô tả", format: p => @Html.Raw(p.CauHinh)),
+        gr.Column("HinhAnh", "Hình Ảnh", format: p => @Html.Raw("<img width=\"150\" height=\"100\" src=\"/Content/HinhSP/" + p.HinhAnh + "\">")),
+        gr.Column(format: p=>Html.ActionLink("Chỉnh sửa","ChinhSua",new {id=p.MaSP})),
+        gr.Column(format: p => Html.ActionLink("Xóa", "Xoa", new { id = p.MaSP }))
+       )
+
+    )
+
+<style>
+    .divTalble {
+        width:100%;
+        border: 1px solid #999999;
+    }
+    .divTalble td {
+        border: 1px solid #999999;
+    }
+
+    .gridHead {
+        background-color: green;
+    }
+
+        .gridHead > th > a {
+            color: #fff;
+        }
+    .gridFooter{
+        font-weight:bold;
+    }
+    .gridRow {
+        color: #fff;
+        background-color: blueviolet
+    }
+</style>

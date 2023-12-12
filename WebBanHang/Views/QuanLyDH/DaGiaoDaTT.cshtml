@@ -1,0 +1,59 @@
+﻿@using WebBanHang.Models;
+@model IEnumerable<DonDH>
+@{
+    ViewBag.Title = "DaGiaoDaTT";
+    Layout = "~/Views/Layouts/AdminLayout.cshtml";
+    WebGrid gr = new WebGrid(source: Model, rowsPerPage: 6);
+}
+
+<ul class="nav nav-tabs">
+    <li role="presentation" ><a class="nav-link" href="@Url.Action("ChuaTT","QuanLyDH")">Chưa thanh toán</a></li>
+    <li role="presentation" ><a class="nav-link" href="@Url.Action("ChuaGiao","QuanLyDH")">Chưa giao hàng</a></li>
+    <li role="presentation"class="active"><a class="nav-link btn btn-danger" href="@Url.Action("DaGiaoDaTT","QuanlyDH")">Đã giao & thanh toán</a></li>
+</ul>
+
+@gr.GetHtml(
+
+    tableStyle: "divTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    columns: gr.Columns(
+        gr.Column("MaDDH", header: "Mã đơn hàng"),
+        gr.Column("MaKH", header: "Họ tên", format: p => p.MaKH != null ? p.KhachHang.TenKH : ""),
+        gr.Column("NgayDat", header: "Ngày đặt"),
+        gr.Column("TinhTrangGH", header: "Tình trạng giao hàng"),
+        gr.Column("NgayGiao", header: "Ngày Giao"),
+        gr.Column("DaThanhToan", header: "Đã thanh toán"),
+        gr.Column("UuDai", header: "Ưu đãi"),
+        gr.Column("DaHuy", header: "Đã hủy"),
+        gr.Column(format: p => Html.ActionLink("Duyệt đơn hàng", "DuyetDonHang", new { id = p.MaDDH }, new { @target = "_blank" }))
+
+       )
+
+    )
+
+<style>
+    .divTalble {
+        width: 100%;
+        border: 1px solid #999999;
+    }
+
+        .divTalble td {
+            border: 1px solid #999999;
+        }
+
+    .gridHead {
+        background-color: green;
+    }
+
+        .gridHead > th > a {
+            color: #fff;
+        }
+
+    .gridFooter {
+        font-weight: bold;
+    }
+</style>
+

@@ -1,0 +1,30 @@
+﻿
+@using WebBanHang.Models;
+@model IEnumerable<SanPham>
+
+
+
+
+<div class="container">
+    <div class="row">
+
+        @foreach (var item in Model.Take(6))
+        {
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                <div class="shop-cat-box">
+                    <img  width="150" height="260" src="@Url.Content("~/Content/HinhSP/" +item.HinhAnh)" alt="">
+
+                    <a class="img-fluid" style="color:yellowgreen">@Html.Raw(item.CauHinh)</a>
+
+                    <a class="btn hvr-hover" href="@Url.Action("XemChiTiet", "SanPham", new { id=item.MaSP})">@item.TenSP</a>
+                </div>
+
+
+
+            </div>
+        }
+        
+    </div>
+</div>
+   
